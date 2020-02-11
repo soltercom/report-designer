@@ -1,0 +1,16 @@
+#flex-container {
+  height: calc(100% - 64px - 64px);
+  display: flex;
+}
+
+#left-part {
+  background-color: #666;
+}
+
+#right-part {
+  background-color: #999;
+}
+
+mat-divider {
+  cursor: w-resize;
+}

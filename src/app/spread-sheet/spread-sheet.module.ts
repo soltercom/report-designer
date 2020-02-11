@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SpreadSheetComponent } from './components/spread-sheet/spread-sheet.component';
-import { CellComponent } from './components/cell/cell.component';
+import { SpreadSheetComponent } from '../garbage/spread-sheet/spread-sheet.component';
+import { CellComponent } from '../garbage/cell/cell.component';
 import { PropertiesComponent } from './components/properties/properties.component';
 import { FlexContainerComponent } from '../garbage/flex-container/flex-container.component';
 import { MaterialModule } from '../material/material.module';

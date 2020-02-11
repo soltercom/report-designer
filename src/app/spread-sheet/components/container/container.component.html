@@ -1,0 +1,12 @@
+<div id="flex-container">
+  <mat-grid-list [cols]="w" [rowHeight]="'100%'" [style.width]="'100%'">
+    <mat-grid-tile id="left-part"
+                   [colspan]="wLeft">{{wLeft}}</mat-grid-tile>
+    <mat-grid-tile id="right-part"
+                   [colspan]="wRight">{{wRight}}</mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider id="divider"
+               cdkDrag [vertical]="true" cdkDragLockAxis="x"
+               [cdkDragFreeDragPosition]="dragPosition"
+               (cdkDragEnded)="onDragEnded($event)"></mat-divider>
+</div>
