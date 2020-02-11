@@ -1,0 +1,19 @@
+<div class="table-wrapper">
+  <table>
+    <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let col of cols">{{col}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of rows">
+      <td>{{row}}</td>
+      <td *ngFor="let col of cols">
+        <app-cell></app-cell>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

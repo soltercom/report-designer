@@ -1,0 +1,16 @@
+div.app-main-layout {
+  height: calc(100% - 64px - 64px);
+  width: 100%;
+}
+
+div.app-spread-sheet {
+  width: 80%;
+  height: 100%;
+  float: left;
+}
+
+div.app-properties {
+  width: 20%;
+  height: 100%;
+  float: left;
+}

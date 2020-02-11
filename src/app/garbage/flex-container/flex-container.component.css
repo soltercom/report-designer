@@ -1,0 +1,33 @@
+#flex-container {
+  height: 100%;
+  display: flex;
+}
+
+#divider {
+  background: #eee;
+  height: 100%;
+  width: 20px;
+  top: 64px;
+  position: absolute;
+}
+
+#divider:hover {
+  cursor: w-resize;
+}
+
+#left-part {
+  background: #666;
+  height: 100%;
+}
+
+#right-part {
+  background: #999;
+  height: 100%;
+}
+
+#mid-part {
+  width: 20px;
+  z-index: -10;
+}
+
+
