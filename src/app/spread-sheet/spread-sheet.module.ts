@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SpreadSheetComponent } from '../garbage/spread-sheet/spread-sheet.component';
-import { CellComponent } from '../garbage/cell/cell.component';
 import { PropertiesComponent } from './components/properties/properties.component';
-import { FlexContainerComponent } from '../garbage/flex-container/flex-container.component';
 import { MaterialModule } from '../material/material.module';
 import { ContainerComponent } from './components/container/container.component';
+import { SpreadSheetComponent } from './components/spread-sheet/spread-sheet.component';
 
 @NgModule({
-    declarations: [SpreadSheetComponent, CellComponent, PropertiesComponent, FlexContainerComponent, ContainerComponent],
-  exports: [
-    SpreadSheetComponent,
+  declarations: [
     PropertiesComponent,
-    FlexContainerComponent,
+    ContainerComponent,
+    SpreadSheetComponent
+  ],
+  exports: [
     ContainerComponent
   ],
-    imports: [
-        CommonModule,
-        MaterialModule
-    ]
+  imports: [
+      CommonModule,
+      MaterialModule
+  ]
 })
 export class SpreadSheetModule { }
