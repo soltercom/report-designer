@@ -4,14 +4,42 @@
 }
 
 table {
-  border: 1px solid #ddd;
   border-collapse: collapse;
 }
 
 td {
-  width: 100px;
-  height: 20px;
   border: 1px solid #dddddd;
+  padding: 0;
+  word-wrap: break-word;
 }
 
+td.normal-cell{
+}
+
+.null-cell, .row-header-cell, .col-header-cell {
+  background-color: #eeeeee;
+  font-weight: bold;
+}
+
+.null-cell {
+  min-width: 30px;
+  min-height: 20px;
+}
+
+.row-header-cell {
+  width: 30px;
+  text-align: center;
+}
+
+.col-header-cell {
+  height: 20px;
+  text-align: center;
+}
+
+mat-divider {
+  cursor: w-resize;
+  position: absolute;
+  height: 100%;
+  border-color: #dddddd;
+}
 

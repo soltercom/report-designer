@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SpreadSheetService } from '../../service/spread-sheet.service';
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-spread-sheet',
@@ -7,16 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpreadSheetComponent implements OnInit {
 
-  cols: number[] = [];
-  rows: number[] = [];
-
-  constructor() { }
+  constructor(public ssService: SpreadSheetService) { }
 
   ngOnInit() {
-    for (let i = 0; i < 25; i++) {
-      this.cols.push(i);
-      this.rows.push(i);
-    }
   }
 
+  onColumnDragEnded($event: CdkDragEnd, num: number) {
+    this.ssService.addColumnWidth(num, $event.distance.x);
+  }
 }

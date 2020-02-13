@@ -1,9 +1,18 @@
 <div class="table-wrapper">
   <table>
+    <mat-divider cdkDrag [vertical]="true" cdkDragLockAxis="x" *ngFor="let col of ssService.columns"
+                 [cdkDragFreeDragPosition]="ssService.getColumnDragPosition(col.num)"
+                 (cdkDragEnded)="onColumnDragEnded($event, col.num)"></mat-divider>
     <tbody>
-      <tr *ngFor="let row of rows">
-        <td *ngFor="let col of cols">
-          {{row}}:{{col}}
+      <tr>
+        <td class="null-cell"></td>
+        <td class="col-header-cell" *ngFor="let col of ssService.columns" [style.min-width]="col.widthPx">
+          {{col.num}}
+        </td>
+      </tr>
+      <tr *ngFor="let row of ssService.rows">
+        <td class="row-header-cell" [style.height]="row.heightPx">{{row.num}}</td>
+        <td class="normal-cell" *ngFor="let col of ssService.columns">
         </td>
       </tr>
     </tbody>
