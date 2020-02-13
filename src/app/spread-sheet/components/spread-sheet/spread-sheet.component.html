@@ -1,8 +1,15 @@
 <div class="table-wrapper">
   <table>
-    <mat-divider cdkDrag [vertical]="true" cdkDragLockAxis="x" *ngFor="let col of ssService.columns"
+    <mat-divider cdkDrag [vertical]="true" cdkDragLockAxis="x"
+                 class="col-divider"
+                 *ngFor="let col of ssService.columns"
                  [cdkDragFreeDragPosition]="ssService.getColumnDragPosition(col.num)"
                  (cdkDragEnded)="onColumnDragEnded($event, col.num)"></mat-divider>
+    <mat-divider cdkDrag cdkDragLockAxis="y"
+                 class="row-divider"
+                 *ngFor="let row of ssService.rows"
+                 [cdkDragFreeDragPosition]="ssService.getRowDragPosition(row.num)"
+                 (cdkDragEnded)="onRowDragEnded($event, row.num)"></mat-divider>
     <tbody>
       <tr>
         <td class="null-cell"></td>

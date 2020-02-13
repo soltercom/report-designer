@@ -17,4 +17,8 @@ export class SpreadSheetComponent implements OnInit {
   onColumnDragEnded($event: CdkDragEnd, num: number) {
     this.ssService.addColumnWidth(num, $event.distance.x);
   }
+
+  onRowDragEnded($event: CdkDragEnd, num: number) {
+    this.ssService.addRowHeight(num, $event.distance.y);
+  }
 }

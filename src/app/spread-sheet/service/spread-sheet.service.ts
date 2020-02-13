@@ -35,6 +35,10 @@ export class SpreadSheetService {
     this._columns[num - 1].width += width;
   }
 
+  addRowHeight(num: number, height: number) {
+    this._rows[num - 1].height += height;
+  }
+
   getColumnDragPosition(num: number): { x: number, y: number } {
     let res = SpreadSheetService.ROW_HEADER_WIDTH + 1.2;
     for (let i = 1; i <= Math.min(num, this._columns.length); i++) {
@@ -43,5 +47,12 @@ export class SpreadSheetService {
     return {x: res, y: 0};
   }
 
+  getRowDragPosition(num: number): {x: number, y: number } {
+    let res = SpreadSheetService.COL_HEADER_HEIGHT;
+    for (let i = 1; i <= Math.min(num, this._rows.length); i++) {
+      res += (this._rows[i - 1].height + .8);
+    }
+    return {x: 0, y: res};
+  }
 }
 
