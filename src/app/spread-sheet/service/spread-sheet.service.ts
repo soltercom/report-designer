@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Row } from '../model/row';
 import { Column } from '../model/column';
+import { Cell } from '../model/cell';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class SpreadSheetService {
 
   private readonly _rows: Row[] = [];
   private readonly _columns: Column[] = [];
+  private readonly _cells: Cell[] = [];
 
   constructor() {
     for (let i = 1; i <= SpreadSheetService.MAX_COL; i++) {
@@ -21,6 +23,11 @@ export class SpreadSheetService {
     }
     for (let i = 1; i < SpreadSheetService.MAX_ROW; i++) {
       this._rows.push(new Row(i, 20));
+    }
+    for (let row = 1; row <= SpreadSheetService.MAX_ROW; row++) {
+      for (let col = 1; col <= SpreadSheetService.MAX_COL; col++) {
+        this._cells.push(new Cell(this.getRow(row), this.getColumn(col)));
+      }
     }
   }
 
@@ -31,12 +38,28 @@ export class SpreadSheetService {
     return this._rows;
   }
 
+  getRow(num: number): Row {
+    return this.rows[num - 1];
+  }
+  getColumn(num: number): Column {
+    return this.columns[num - 1];
+  }
+
   addColumnWidth(num: number, width: number) {
-    this._columns[num - 1].width += width;
+    this.columns[num - 1].width += width;
   }
 
   addRowHeight(num: number, height: number) {
-    this._rows[num - 1].height += height;
+    this.rows[num - 1].height += height;
+  }
+
+  getCell(row: Row, column: Column): Cell {
+    const index = this._cells.findIndex((cell) => cell.name === Cell.nameTemplate(row, column));
+    if (index >= -1) {
+      return this._cells[index];
+    } else {
+      return null;
+    }
   }
 
   getColumnDragPosition(num: number): { x: number, y: number } {

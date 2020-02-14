@@ -13,9 +13,6 @@ td {
   word-wrap: break-word;
 }
 
-td.normal-cell{
-}
-
 .null-cell, .row-header-cell, .col-header-cell {
   background-color: #eeeeee;
   font-weight: bold;
@@ -43,11 +40,25 @@ mat-divider {
 }
 
 .col-divider {
-  height: 100%;
+  height: 20px;
+}
+
+.col-divider:hover{
   cursor: w-resize;
 }
 
 .row-divider {
-  height: 100%;
+  width: 30px;
+}
+
+.row-divider:hover{
   cursor: n-resize;
+}
+
+td.normal-cell:hover{
+  cursor: pointer;
+}
+
+.selected-normal-cell {
+  border: 2px #3f51b5 ridge;
 }

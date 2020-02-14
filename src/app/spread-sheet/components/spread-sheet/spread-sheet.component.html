@@ -19,7 +19,8 @@
       </tr>
       <tr *ngFor="let row of ssService.rows">
         <td class="row-header-cell" [style.height]="row.heightPx">{{row.num}}</td>
-        <td class="normal-cell" *ngFor="let col of ssService.columns">
+        <td class="normal-cell" [class.mat-elevation-z4]="isSelected(row, col)"
+            *ngFor="let col of ssService.columns" (click)="selectCell(row, col)">
         </td>
       </tr>
     </tbody>
