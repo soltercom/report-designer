@@ -2,10 +2,12 @@
   <mat-grid-list [cols]="w" [rowHeight]="'100%'" [style.width]="'100%'">
     <mat-grid-tile id="left-part"
                    [colspan]="wLeft">
-      <app-spread-sheet></app-spread-sheet>
+      <app-spread-sheet [selectedCell]="selectedCell" (cellSelected)="onCellSelected($event)"></app-spread-sheet>
     </mat-grid-tile>
     <mat-grid-tile id="right-part"
-                   [colspan]="wRight">{{wRight}}</mat-grid-tile>
+                   [colspan]="wRight">
+      <app-properties [cell]="selectedCell" (cellUpdated)="onCellUpdated($event)"></app-properties>
+    </mat-grid-tile>
   </mat-grid-list>
   <mat-divider id="divider"
                cdkDrag [vertical]="true" cdkDragLockAxis="x"

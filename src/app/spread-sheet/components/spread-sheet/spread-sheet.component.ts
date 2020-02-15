@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SpreadSheetService } from '../../service/spread-sheet.service';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Cell } from '../../model/cell';
@@ -12,7 +12,11 @@ import { Column } from '../../model/column';
 })
 export class SpreadSheetComponent implements OnInit {
 
-  selectedCell: Cell = null;
+  @Input()
+  selectedCell: Cell;
+
+  @Output()
+  cellSelected = new EventEmitter<Cell>();
 
   constructor(public ssService: SpreadSheetService) { }
 
@@ -29,6 +33,7 @@ export class SpreadSheetComponent implements OnInit {
 
   selectCell(row: Row, column: Column) {
     this.selectedCell = this.ssService.getCell(row, column);
+    this.cellSelected.emit(this.selectedCell);
   }
 
   isSelected(row: Row, column: Column): boolean {

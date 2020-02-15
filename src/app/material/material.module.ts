@@ -1,5 +1,13 @@
 import { NgModule } from '@angular/core';
-import { MatDividerModule, MatGridListModule, MatIconModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatDividerModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatSelectModule,
+  MatToolbarModule
+} from '@angular/material';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
@@ -9,13 +17,19 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatIconModule,
     MatGridListModule,
     MatDividerModule,
-    DragDropModule
+    DragDropModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule
   ], exports: [
     MatToolbarModule,
     MatIconModule,
     MatGridListModule,
     MatDividerModule,
-    DragDropModule
+    DragDropModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule
   ]
 })
 export class MaterialModule { }

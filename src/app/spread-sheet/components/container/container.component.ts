@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { Cell, CellProps } from '../../model/cell';
+import { SpreadSheetService } from '../../service/spread-sheet.service';
 
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.css'],
-  host: {
-    '(window:resize)': 'onResize($event)'
-  }
 })
 export class ContainerComponent implements OnInit {
+  selectedCell: Cell;
 
   private _curX = 0;
   private _w = 0;
   private _ratio = 0;
+
+  @HostListener('window:resize', ['$event'])
+  onResize($event) {
+    this.w = 0;
+    this.curX = Math.ceil(this.w * this.ratio - this.w);
+  }
 
   get w() {
     return this._w;
@@ -43,12 +49,20 @@ export class ContainerComponent implements OnInit {
     return this._ratio;
   }
 
-  constructor() {}
+  constructor(private ssService: SpreadSheetService) {}
 
   ngOnInit() {
     this.w = 0;
-    this.curX = -Math.ceil( this.w / 2);
+    this.curX = -Math.ceil( this.w / 5);
     this.ratio = 0;
+  }
+
+  onCellSelected(cell: Cell) {
+    this.selectedCell = cell;
+  }
+
+  onCellUpdated(props: CellProps) {
+    this.selectedCell = this.ssService.updateCell(this.selectedCell, props);
   }
 
   private elem = (id: string) => document.getElementById(id) as HTMLElement;
@@ -56,11 +70,6 @@ export class ContainerComponent implements OnInit {
   onDragEnded($event: CdkDragEnd) {
     this.curX += $event.distance.x;
     this.ratio = 0;
-  }
-
-  onResize($event) {
-    this.w = 0;
-    this.curX = Math.ceil(this.w * this.ratio - this.w);
   }
 
 }

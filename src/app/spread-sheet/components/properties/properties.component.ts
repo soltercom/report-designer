@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Cell, CellProps } from '../../model/cell';
 
 @Component({
   selector: 'app-properties',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropertiesComponent implements OnInit {
 
+  @Input() cell: Cell;
+  @Output() cellUpdated = new EventEmitter<CellProps>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onCellUpdated(props: CellProps) {
+    this.cellUpdated.emit(props);
   }
 
 }

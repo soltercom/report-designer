@@ -4,19 +4,23 @@ import { PropertiesComponent } from './components/properties/properties.componen
 import { MaterialModule } from '../material/material.module';
 import { ContainerComponent } from './components/container/container.component';
 import { SpreadSheetComponent } from './components/spread-sheet/spread-sheet.component';
+import { CellPropertiesComponent } from './components/cell-properties/cell-properties.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     PropertiesComponent,
     ContainerComponent,
-    SpreadSheetComponent
+    SpreadSheetComponent,
+    CellPropertiesComponent
   ],
   exports: [
     ContainerComponent
   ],
   imports: [
-      CommonModule,
-      MaterialModule
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class SpreadSheetModule { }
