@@ -1,5 +1,5 @@
 <div class="table-wrapper">
-  <table>
+  <table (mouseenter)="onTableEnter()" (mouseleave)="onTableLeave()">
     <mat-divider cdkDrag [vertical]="true" cdkDragLockAxis="x"
                  class="col-divider"
                  *ngFor="let col of ssService.columns"
@@ -13,14 +13,19 @@
     <tbody>
       <tr>
         <td class="null-cell"></td>
-        <td class="col-header-cell" *ngFor="let col of ssService.columns" [style.min-width]="col.widthPx">
+        <td class="col-header-cell" *ngFor="let col of ssService.columns"
+            [style.min-width]="col.widthPx">
           {{col.num}}
         </td>
       </tr>
-      <tr *ngFor="let row of ssService.rows">
-        <td class="row-header-cell" [style.height]="row.heightPx">{{row.num}}</td>
-        <td class="normal-cell" [class.mat-elevation-z4]="isSelected(row, col)"
-            *ngFor="let col of ssService.columns" (click)="selectCell(row, col)">
+      <tr *ngFor="let row of ssService.rows; let i=index;">
+        <td class="row-header-cell"
+            [style.height]="row.heightPx">{{row.num}}</td>
+        <td class="normal-cell"
+            *ngFor="let col of ssService.columns; let j=index;"
+            [class.mat-elevation-z4]="isSelected(i, j)"
+            (click)="selectCell(i, j)">
+          <div [style.max-height]="row.heightPx">{{getFormattedText(i, j)}}</div>
         </td>
       </tr>
     </tbody>

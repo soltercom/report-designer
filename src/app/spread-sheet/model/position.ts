@@ -6,8 +6,14 @@ export class Position {
   get row() {
     return this._row;
   }
+  get rowIndex() {
+    return this.row.num - 1;
+  }
   get column() {
     return this._column;
+  }
+  get columnIndex() {
+    return this.column.num - 1;
   }
   get name() {
     return Position.nameTemplate(this._row, this._column);
@@ -18,8 +24,8 @@ export class Position {
 
   constructor(private readonly _row: Row, private readonly _column: Column) {}
 
-  isEqualRowAndColumn(row: Row, column: Column): boolean {
-    return this.name === Position.nameTemplate(row, column);
+  isEqualRowAndColumn(rowIndex: number, columnIndex: number): boolean {
+    return this.rowIndex === rowIndex && this.columnIndex === columnIndex;
   }
 
 }

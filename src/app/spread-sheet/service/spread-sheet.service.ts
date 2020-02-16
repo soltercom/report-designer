@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Row } from '../model/row';
 import { Column } from '../model/column';
 import { Cell, CellProps } from '../model/cell';
-import { Position } from '../model/position';
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +13,28 @@ export class SpreadSheetService {
   static readonly ROW_HEADER_WIDTH = 30;
   static readonly COL_HEADER_HEIGHT = 20;
 
-  private readonly rows: Row[] = [];
-  private readonly columns: Column[] = [];
-  private readonly cells: Cell[] = [];
+  private readonly _rows: Row[] = [];
+  private readonly _columns: Column[] = [];
+  private readonly cells: Cell[][] = [];
+
+  get rows() {
+    return this._rows;
+  }
+  get columns() {
+    return this._columns;
+  }
 
   constructor() {
-    for (let i = 1; i <= SpreadSheetService.MAX_COL; i++) {
-      this.columns.push(new Column(i, 100));
-    }
     for (let i = 1; i < SpreadSheetService.MAX_ROW; i++) {
       this.rows.push(new Row(i, 20));
     }
-    for (const row of this.rows) {
-      for (const col of this.columns) {
-        this.cells.push(Cell.emptyCell(row, col));
+    for (let i = 1; i <= SpreadSheetService.MAX_COL; i++) {
+      this.columns.push(new Column(i, 100));
+    }
+    for (let i = 0; i <= SpreadSheetService.MAX_ROW - 1; i++) {
+      this.cells[i] = [];
+      for (let j = 0; j < SpreadSheetService.MAX_COL - 1; j++) {
+        this.cells[i].push(Cell.emptyCell(this.rows[i], this.columns[j]));
       }
     }
   }
@@ -40,14 +47,8 @@ export class SpreadSheetService {
     this.rows[num - 1].height += height;
   }
 
-  getCell(row: Row, column: Column): Cell {
-    const position = new Position(row, column);
-    const index = this.cells.findIndex((cell) => Position.isEqual(cell.position, position));
-    if (index >= -1) {
-      return this.cells[index];
-    } else {
-      return null;
-    }
+  getCell(rowIndex: number, columnIndex: number): Cell {
+    return this.cells[rowIndex][columnIndex];
   }
 
   getColumnDragPosition(num: number): { x: number, y: number } {
@@ -68,10 +69,7 @@ export class SpreadSheetService {
 
   updateCell(cell: Cell, props: CellProps): Cell {
     const newCell = Cell.updateCell(cell, props);
-    const index = this.cells.findIndex((item) => Position.isEqual(item.position, cell.position));
-    if (index >= -1) {
-      return this.cells[index] = newCell;
-    }
+    this.cells[cell.rowIndex][cell.columnIndex] = newCell;
     return newCell;
   }
 

@@ -10,12 +10,11 @@ table {
 td {
   border: 1px solid #dddddd;
   padding: 0;
-  word-wrap: break-word;
 }
 
 .null-cell, .row-header-cell, .col-header-cell {
   background-color: #eeeeee;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .null-cell {
@@ -35,7 +34,6 @@ td {
 
 mat-divider {
   position: absolute;
-  width: 100%;
   border-color: #dddddd;
 }
 
@@ -59,6 +57,7 @@ td.normal-cell:hover{
   cursor: pointer;
 }
 
-.selected-normal-cell {
-  border: 2px #3f51b5 ridge;
+td.normal-cell div {
+  overflow: hidden;
 }
+

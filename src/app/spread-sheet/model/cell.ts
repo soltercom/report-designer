@@ -30,11 +30,25 @@ export class Cell {
   get position() {
     return this._position;
   }
+  get rowIndex() {
+    return this.position.rowIndex;
+  }
+  get columnIndex() {
+    return this.position.columnIndex;
+  }
   get text() {
     return this._props.text;
   }
   get type() {
     return this._props.type;
+  }
+  get formattedText() {
+    switch (this._props.type) {
+      case CellType.Parameter:
+        return `<${this._props.text}>`;
+      default:
+        return this._props.text;
+    }
   }
 
   constructor(private _position: Position) {
@@ -44,8 +58,8 @@ export class Cell {
     };
   }
 
-  isEqualRowAndColumn(row: Row, column: Column): boolean {
-    return this.position.isEqualRowAndColumn(row, column);
+  isEqualRowAndColumn(rowIndex: number, columnIndex: number): boolean {
+    return this.position.isEqualRowAndColumn(rowIndex, columnIndex);
   }
 
 }
