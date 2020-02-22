@@ -1,4 +1,31 @@
-<div class="table-wrapper">
+<mat-divider cdkDrag [vertical]="true" cdkDragLockAxis="x"
+             class="col-divider"
+             *ngFor="let col of ssService.columns"
+             [cdkDragFreeDragPosition]="ssService.getColumnDragPosition(col.num)"
+             (cdkDragEnded)="onColumnDragEnded($event, col.num)"></mat-divider>
+<mat-divider cdkDrag cdkDragLockAxis="y"
+             class="row-divider"
+             *ngFor="let row of ssService.rows"
+             [cdkDragFreeDragPosition]="ssService.getRowDragPosition(row.num)"
+             (cdkDragEnded)="onRowDragEnded($event, row.num)"></mat-divider>
+
+<div class="table-wrapper" (mouseenter)="onTableEnter()" (mouseleave)="onTableLeave()">
+  <div class="row" [style.width]="ssService.rowWidthPx">
+    <app-null-cell></app-null-cell>
+    <app-column-header-cell [column]=column *ngFor="let column of ssService.columns">
+    </app-column-header-cell>
+  </div>
+  <div class="row" [style.width]="ssService.rowWidthPx" *ngFor="let row of ssService.rows; let i=index;">
+    <app-row-header-cell [row]="row"></app-row-header-cell>
+    <app-normal-cell *ngFor="let col of ssService.columns; let j=index;"
+       [cell]="ssService.getCell(i, j)"
+       [selected]="isSelected(i, j)"
+       (cellSelected)="onCellSelected($event)">
+    </app-normal-cell>
+  </div>
+</div>
+
+<!--<div class="table-wrapper">
   <table (mouseenter)="onTableEnter()" (mouseleave)="onTableLeave()">
     <mat-divider cdkDrag [vertical]="true" cdkDragLockAxis="x"
                  class="col-divider"
@@ -19,15 +46,24 @@
         </td>
       </tr>
       <tr *ngFor="let row of ssService.rows; let i=index;">
-        <td class="row-header-cell"
-            [style.height]="row.heightPx">{{row.num}}</td>
+        <td class="row-header-cell" [style.height]="row.heightPx">{{row.num}}</td>
         <td class="normal-cell"
-            *ngFor="let col of ssService.columns; let j=index;"
+            *ngFor="let col of ssService.columns; let j=index;" cell="ssService.getCell(i, j);"
+            [rowSpan]="1" [colSpan]="1"
             [class.mat-elevation-z4]="isSelected(i, j)"
             (click)="selectCell(i, j)">
           <div [style.max-height]="row.heightPx">{{getFormattedText(i, j)}}</div>
-        </td>
-      </tr>
+        </td>-->
+        <!--<ng-template *ngFor="let col of ssService.columns; let j=index;">
+          <app-spread-sheet-cell
+            [cell]="ssService.getCell(i, j)"
+            [height]="row.heightPx"
+            [width]="col.widthPx"
+            [selected]="isSelected(i, j)"
+            (cellSelected)="onCellSelected($event)">
+          </app-spread-sheet-cell>
+        </ng-template>-->
+<!--      </tr>
     </tbody>
   </table>
-</div>
+</div>-->

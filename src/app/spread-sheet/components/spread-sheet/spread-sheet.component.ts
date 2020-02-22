@@ -50,13 +50,13 @@ export class SpreadSheetComponent implements OnInit {
     this.cellSelected.emit(this.selectedCell);
   }
 
-  getFormattedText(rowIndex: number, columnIndex: number): string {
-    const cell = this.ssService.getCell(rowIndex, columnIndex);
-    return cell ? cell.formattedText : '';
-  }
-
   isSelected(rowIndex: number, columnIndex: number): boolean {
     return this.selectedCell && this.selectedCell.isEqualRowAndColumn(rowIndex, columnIndex);
+  }
+
+  onCellSelected(cell: Cell) {
+    this.selectedCell = cell;
+    this.cellSelected.emit(this.selectedCell);
   }
 
   moveCell(key: string) {

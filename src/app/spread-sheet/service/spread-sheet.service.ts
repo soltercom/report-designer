@@ -23,18 +23,21 @@ export class SpreadSheetService {
   get columns() {
     return this._columns;
   }
+  get rowWidthPx() {
+    return `${this._columns.reduce((acc, cur) => acc + cur.width, 0)}px`;
+  }
 
   constructor() {
-    for (let i = 1; i < SpreadSheetService.MAX_ROW; i++) {
+    for (let i = 1; i <= SpreadSheetService.MAX_ROW; i++) {
       this.rows.push(new Row(i, 20));
     }
     for (let i = 1; i <= SpreadSheetService.MAX_COL; i++) {
       this.columns.push(new Column(i, 100));
     }
-    for (let i = 0; i <= SpreadSheetService.MAX_ROW - 1; i++) {
+    for (let i = 0; i < SpreadSheetService.MAX_ROW; i++) {
       this.cells[i] = [];
-      for (let j = 0; j < SpreadSheetService.MAX_COL - 1; j++) {
-        this.cells[i].push(Cell.emptyCell(this.rows[i], this.columns[j]));
+      for (let j = 0; j < SpreadSheetService.MAX_COL; j++) {
+        this.cells[i].push(Cell.createCell(this.rows[i], this.columns[j]));
       }
     }
   }
@@ -52,9 +55,9 @@ export class SpreadSheetService {
   }
 
   getColumnDragPosition(num: number): { x: number, y: number } {
-    let res = SpreadSheetService.ROW_HEADER_WIDTH + 1.2;
+    let res = SpreadSheetService.ROW_HEADER_WIDTH;
     for (let i = 1; i <= Math.min(num, this.columns.length); i++) {
-      res += (this.columns[i - 1].width + .8);
+      res += this.columns[i - 1].width;
     }
     return {x: res, y: 0};
   }
@@ -62,13 +65,13 @@ export class SpreadSheetService {
   getRowDragPosition(num: number): {x: number, y: number } {
     let res = SpreadSheetService.COL_HEADER_HEIGHT;
     for (let i = 1; i <= Math.min(num, this.rows.length); i++) {
-      res += (this.rows[i - 1].height + .8);
+      res += this.rows[i - 1].height;
     }
     return {x: 0, y: res};
   }
 
   updateCell(cell: Cell, props: CellProps): Cell {
-    const newCell = Cell.updateCell(cell, props);
+    const newCell = Cell.updateProps(cell, props);
     this.cells[cell.rowIndex][cell.columnIndex] = newCell;
     return newCell;
   }

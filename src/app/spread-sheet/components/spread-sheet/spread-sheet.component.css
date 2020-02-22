@@ -1,40 +1,10 @@
-.table-wrapper {
-  width: 100%;
-  height: 100%;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-td {
-  border: 1px solid #dddddd;
-  padding: 0;
-}
-
-.null-cell, .row-header-cell, .col-header-cell {
-  background-color: #eeeeee;
-  font-weight: 400;
-}
-
-.null-cell {
-  min-width: 30px;
-  min-height: 20px;
-}
-
-.row-header-cell {
-  width: 30px;
-  text-align: center;
-}
-
-.col-header-cell {
-  height: 20px;
-  text-align: center;
-}
-
 mat-divider {
   position: absolute;
   border-color: #dddddd;
+}
+
+.row {
+  display: flex;
 }
 
 .col-divider {
@@ -52,12 +22,3 @@ mat-divider {
 .row-divider:hover{
   cursor: n-resize;
 }
-
-td.normal-cell:hover{
-  cursor: pointer;
-}
-
-td.normal-cell div {
-  overflow: hidden;
-}
-

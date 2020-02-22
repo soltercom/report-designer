@@ -6,13 +6,21 @@ import { ContainerComponent } from './components/container/container.component';
 import { SpreadSheetComponent } from './components/spread-sheet/spread-sheet.component';
 import { CellPropertiesComponent } from './components/cell-properties/cell-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ColumnHeaderCellComponent } from './components/cells/column-header-cell/column-header-cell.component';
+import { NullCellComponent } from './components/cells/null-cell/null-cell.component';
+import { RowHeaderCellComponent } from './components/cells/row-header-cell/row-header-cell.component';
+import { NormalCellComponent } from './components/cells/normal-cell/normal-cell.component';
 
 @NgModule({
   declarations: [
     PropertiesComponent,
     ContainerComponent,
     SpreadSheetComponent,
-    CellPropertiesComponent
+    CellPropertiesComponent,
+    ColumnHeaderCellComponent,
+    NullCellComponent,
+    RowHeaderCellComponent,
+    NormalCellComponent
   ],
   exports: [
     ContainerComponent

@@ -1,0 +1,7 @@
+<div class="normal-cell"
+      [style.width]="0 || cell?.position.column.widthPx"
+      [style.height]="0 || cell?.position.row.heightPx"
+     [class.mat-elevation-z4]="selected"
+     (click)="selectCell()">
+  {{cell.formattedText}}
+</div>
