@@ -1,6 +1,6 @@
 .normal-cell {
   margin: -1px;
-  padding: 2px;
+  padding: 0;
   overflow: hidden;
   border: 1px solid #eee;
 }
